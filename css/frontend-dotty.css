@@ -1,0 +1,10 @@
+.user-signature {
+  padding: 0.25em;
+  background-color: var(--post-meta-background-color, #4b4b4b);
+  border-radius: 0.25em;
+  font-size: 0.9em;
+  opacity: 0.6;
+}
+.user-signature h5 {
+  margin: 0;
+}

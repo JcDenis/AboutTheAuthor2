@@ -1,0 +1,125 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Dotclear\Plugin\AboutTheAuthor2;
+
+use Throwable;
+use Dotclear\App;
+use Dotclear\Helper\Html\Form\{ Input, Label, Note, Textarea };
+use Dotclear\Helper\Html\Html;
+use Dotclear\Plugin\FrontendSession\FrontendSessionProfil;
+
+/**
+ * @brief       AboutTheAuthor2 module frontend behaviors.
+ * @ingroup     AboutTheAuthor2
+ *
+ * @author      Jean-Christian Paul Denis
+ * @copyright   AGPL-3.0
+ */
+class FrontendBehaviors
+{
+    /**
+     * Load JS and CSS and add wiki bar to session signature form.
+     */
+    public static function publicHeadContent(): void
+    {
+        // style
+        $tplset = App::themes()->moduleInfo(App::blog()->settings()->get('system')->get('theme'), 'tplset');
+        if (!My::settings()->get('disable_css') && $tplset == 'dotty') {
+            echo My::cssLoad('frontend-' . $tplset);
+        }
+
+        // JS for wikibar
+        Core::wikibarHead();
+    }
+
+    /**
+     * Add users signatures to the end of posts.
+     */
+    public static function publicEntryAfterContent(): void
+    {
+        if (!My::settings()->get('disable_post_signature')) {
+            echo Core::getSignature(App::frontend()->context()->posts->f('user_id'));
+        }
+    }
+
+    /**
+     * Add users signatures to the end of comments.
+     */
+    public static function publicCommentAfterContent(): void
+    {
+        if (!My::settings()->get('disable_comment_signature')) {
+            echo Core::getSignature(App::frontend()->context()->comments->f('comment_email'), true);
+        }
+    }
+
+    /**
+     * Save user profil from session.
+     */
+    public static function FrontendSessionAction(string $action): void
+    {
+        if ($action == My::id() && App::auth()->userID() != '') {
+            $user_url       = $_POST[My::id() . '_url'];
+            $user_signature = $_POST[My::id() . '_signature'];
+
+            if (!preg_match('|^https?://|', (string) $user_url)) {
+                $user_url = 'http://' . $user_url;
+            }
+            $user_url = (string) filter_var($user_url, FILTER_VALIDATE_URL);
+            $user_id  = (string) App::auth()->userID();
+
+            try {
+                // change user url
+                $cur = App::auth()->openUserCursor();
+                $cur->setField('user_url', $user_url);
+                App::auth()->sudo(App::users()->updUser(...), $user_id, $cur);
+
+                // change user signature
+                App::auth()->prefs()->get(My::id())->put(
+                    'user_signature',
+                    substr($user_signature, 0, Core::SIGNATURE_MAX_LENGTH),
+                    'string',
+                    'user signature',
+                    true,
+                    false
+                );
+
+                // reload user
+                App::auth()->checkUser($user_id);
+
+                App::frontend()->context()->frontend_session->success = __('Profil successfully updated.');
+            } catch (Throwable $e) {
+                App::frontend()->context()->form_error = $e->getMessage();
+            }
+        }
+    }
+
+    /**
+     * Add user profil form to session.
+     */
+    public static function FrontendSessionProfil(FrontendSessionProfil $profil): void
+    {
+        if (App::auth()->userID() != '') {
+            $profil->addAction(My::id(), __('Profil'), [
+                // user_site
+                $profil->getInputfield([
+                    (new Input(My::id() . '_url'))
+                        ->size(30)
+                        ->maxlength(255)
+                        ->value(Html::escapeHTML(App::auth()->getInfo('user_url')))
+                        ->label(new Label(__('Your site URL:'), Label::OL_TF)),
+                ]),
+                $profil->getInputfield([
+                    (new Textarea(My::id() . '_signature', Html::escapeHTML((string) App::auth()->prefs()->get(My::id())->get('user_signature'))))
+                        ->rows(4)
+                        ->label((new Label(__('Signature block:'), Label::OL_TF))),
+                    (new Note())
+                        ->class('note')
+                        ->text(__('Signature max length is 205 chars long and accept wiki syntax.')),
+                ]),
+                $profil->getControlset(My::id(), __('Save')),
+            ]);
+        }
+    }
+}

@@ -1,0 +1,14 @@
+AboutTheAuhtor2 0.1 - 2025.06.08
+===========================================================
+* Require Dotclear 2.34
+* Require PHP 8.1+
+* Can use plugin commentWikiBar
+* Can use plugin FrontendSession
+* Add option to add signature after post content
+* Add option to add signature on widget on post page
+* Add option to add signtaure after comment content
+* Add option to disable defaut CSS
+* Add form to blog preferences page
+* Add form to user preferences page
+* Add form to plugin FrontendSession page
+* Add behavior to support more public pages (default to post)
