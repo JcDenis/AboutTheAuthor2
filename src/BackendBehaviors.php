@@ -24,6 +24,10 @@ class BackendBehaviors
      */
     public static function adminPageHTMLHead(): void
     {
+        if ($_REQUEST['process'] != 'UserPreferences') {
+            return;
+        }
+
         $format = 'wiki';
         $editor = App::auth()->getOption('editor');
 
