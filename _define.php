@@ -18,11 +18,11 @@ $this->registerModule(
     'About the author',
     'Allow user to post from frontend.',
     'Displays information about the author of entries or comments',
-    '0.1',
+    '0.2',
     [
         'requires'    => [
             ['core', '2.34'],
-            //['FrontendSession', '0.28'], // optional
+            //['FrontendSession', '0.30'], // optional
             //['commentsWikibar', '5.4'], // optional
             //['legacyMarkdown', '7.0'], // optional
         ],
