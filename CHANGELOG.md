@@ -1,3 +1,7 @@
+AboutTheAuhtor2 0.4 - 2025.06.15
+===========================================================
+* Add author posts and comments count
+
 AboutTheAuhtor2 0.3 - 2025.06.15
 ===========================================================
 * Use plugins commentsWikibar and legacyMarkdown settings
