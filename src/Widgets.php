@@ -6,8 +6,8 @@ namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
 use Dotclear\Helper\Html\Html;
-use Dotclear\Plugin\widgets\WidgetsStack;
-use Dotclear\Plugin\widgets\WidgetsElement;
+use Dotclear\Helper\Html\Form\{ Li, Ul };
+use Dotclear\Plugin\widgets\{ WidgetsStack, WidgetsElement };
 
 /**
  * @brief       AboutTheAuthor2 widgets class.
@@ -34,6 +34,24 @@ class Widgets
                 __('Add a widget of user signature to an entry')
             )
             ->addTitle(__('About the author'))
+            ->setting(
+                'show_post',
+                __('Show author entries count'),
+                0,
+                'check'
+            )
+            ->setting(
+                'show_comment',
+                __('Show author comments count'),
+                0,
+                'check'
+            )
+            ->setting(
+                'show_signature',
+                __('Show user signature'),
+                1,
+                'check'
+            )
             ->addContentOnly()
             ->addClass()
             ->addOffline();
@@ -48,18 +66,32 @@ class Widgets
     {
         if ($w->get('offline')
             || !App::frontend()->context()->exists('posts')
-            || !App::frontend()->context()->posts->f('post_id')
+            || App::frontend()->context()->posts->isEmpty()
         ) {
             return '';
         }
+
+        $user_email = (string) App::frontend()->context()->posts->f('user_email');
+
+        $count = '';
+        if ($w->get('show_post') || $w->get('show_comment')) {
+            $li = [];
+            if ($w->get('show_post')) {
+                $li[] = (new Li())->text(Core::getPostsCount($user_email));
+            }
+            if ($w->get('show_comment')) {
+                $li[] = (new Li())->text(Core::getCommentsCount($user_email));
+            }
+            $count = (new Ul())->items($li)->render();
+        }
  
-        $signature = Core::getSignature((string) App::frontend()->context()->posts->f('user_id'), false, true);
+        $signature = Core::getSignature($user_email);
 
         return $signature === '' ? '' : $w->renderDiv(
             (bool) $w->get('content_only'),
             My::id() . ' ' . $w->get('class'),
             '',
-            ($w->get('title') ? $w->renderTitle(Html::escapeHTML($w->get('title'))) : '') . $signature
+            ($w->get('title') ? $w->renderTitle(Html::escapeHTML($w->get('title'))) : '') . $count . $signature
         );
     }
 }

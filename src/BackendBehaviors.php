@@ -51,23 +51,47 @@ class BackendBehaviors
             ->items([
                 (new Text('h4', My::name()))
                     ->id(My::id() . '_params'),
-                (new Para())
+                (new Div())
+                    ->class('two-cols')
                     ->items([
-                        (new Checkbox(My::id() . 'post_signature', (bool) !$blog_settings->get(My::id())->get('disable_post_signature')))
-                            ->value(1)
-                            ->label(new Label(__('Enable users signatures to the end of entries'), Label::IL_FT)),
-                    ]),
-                (new Para())
-                    ->items([
-                        (new Checkbox(My::id() . 'comment_signature', (bool) !$blog_settings->get(My::id())->get('disable_comment_signature')))
-                            ->value(1)
-                            ->label(new Label(__('Enable users signatures to the end of comments'), Label::IL_FT)),
-                    ]),
-                (new Para())
-                    ->items([
-                        (new Checkbox(My::id() . 'css', (bool) !$blog_settings->get(My::id())->get('disable_css')))
-                            ->value(1)
-                            ->label(new Label(__('Enable default CSS'), Label::IL_FT)),
+                        (new Div())
+                            ->class('col')
+                            ->items([
+                                (new Para())
+                                    ->items([
+                                        (new Checkbox(My::id() . 'post_signature', (bool) !$blog_settings->get(My::id())->get('disable_post_signature')))
+                                            ->value(1)
+                                            ->label(new Label(__('Enable users signatures to the end of entries'), Label::IL_FT)),
+                                    ]),
+                                (new Para())
+                                    ->items([
+                                        (new Checkbox(My::id() . 'comment_signature', (bool) !$blog_settings->get(My::id())->get('disable_comment_signature')))
+                                            ->value(1)
+                                            ->label(new Label(__('Enable users signatures to the end of comments'), Label::IL_FT)),
+                                    ]),
+                                (new Para())
+                                    ->items([
+                                        (new Checkbox(My::id() . 'css', (bool) !$blog_settings->get(My::id())->get('disable_css')))
+                                            ->value(1)
+                                            ->label(new Label(__('Enable default CSS'), Label::IL_FT)),
+                                    ]),
+                            ]),
+                        (new Div())
+                            ->class('col')
+                            ->items([
+                                (new Para())
+                                    ->items([
+                                        (new Checkbox(My::id() . 'show_posts_count', (bool) $blog_settings->get(My::id())->get('show_posts_count')))
+                                            ->value(1)
+                                            ->label(new Label(__("Show author entries count"), Label::IL_FT)),
+                                    ]),
+                                (new Para())
+                                    ->items([
+                                        (new Checkbox(My::id() . 'show_comments_count', (bool) $blog_settings->get(My::id())->get('show_comments_count')))
+                                            ->value(1)
+                                            ->label(new Label(__("Show author comments count"), Label::IL_FT)),
+                                    ]),
+                            ]),
                     ]),
             ])
             ->render();
@@ -81,6 +105,8 @@ class BackendBehaviors
         $blog_settings->get(My::id())->put('disable_post_signature', empty($_POST[My::id() . 'post_signature']), 'boolean');
         $blog_settings->get(My::id())->put('disable_comment_signature', empty($_POST[My::id() . 'comment_signature']), 'boolean');
         $blog_settings->get(My::id())->put('disable_css', empty($_POST[My::id() . 'css']), 'boolean');
+        $blog_settings->get(My::id())->put('show_posts_count', !empty($_POST[My::id() . 'show_posts_count']), 'boolean');
+        $blog_settings->get(My::id())->put('show_comments_count', !empty($_POST[My::id() . 'show_comments_count']), 'boolean');
     }
 
     /**

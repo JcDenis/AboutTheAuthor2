@@ -1,6 +1,6 @@
 # Language: Français
 # Module: AboutTheAuthor2 - 0.3
-# Date: 2025-06-15 09:45:30
+# Date: 2025-06-15 21:52:31
 # Author: , contact@jcdenis.fr
 # Translated with translater 2025.03.03
 
@@ -9,31 +9,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Project-Id-Version: AboutTheAuthor2 0.3\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-06-15T09:45:30+00:00\n"
+"PO-Revision-Date: 2025-06-15T21:52:31+00:00\n"
 "Last-Translator: Jean-Christian Denis\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/BackendBehaviors.php:58
+#: src/BackendBehaviors.php:64
 msgid "Enable users signatures to the end of entries"
 msgstr "Activer les signatures d'utilisateurs à la fin des billets"
 
-#: src/BackendBehaviors.php:64
+#: src/BackendBehaviors.php:70
 msgid "Enable users signatures to the end of comments"
 msgstr "Activer les signatures d'utilisateurs à la fin des commentaires"
 
-#: src/BackendBehaviors.php:70
+#: src/BackendBehaviors.php:76
 msgid "Enable default CSS"
 msgstr "Activer la feuille de style par default"
 
-#: src/BackendBehaviors.php:121
+#: src/BackendBehaviors.php:86
+#: src/Widgets.php:39
+msgid "Show author entries count"
+msgstr "Afficher le nombre de billets de l'auteur"
+
+#: src/BackendBehaviors.php:92
+#: src/Widgets.php:45
+msgid "Show author comments count"
+msgstr "Afficher le nombre de commentaires de l'auteur"
+
+#: src/BackendBehaviors.php:147
 #: src/FrontendBehaviors.php:123
 msgid "Signature block:"
 msgstr "Bloc de signature :"
 
-#: src/Core.php:93
+#: src/Core.php:83
 #: src/Widgets.php:36
 msgid "About the author"
 msgstr "A propos de l'auteur"
@@ -45,4 +55,8 @@ msgstr "Signature de %s caractères maximum et accepte la syntaxe %s."
 #: src/Widgets.php:34
 msgid "Add a widget of user signature to an entry"
 msgstr "Ajoute un widget de signature de l'auteur d'un billet"
+
+#: src/Widgets.php:51
+msgid "Show user signature"
+msgstr "Afficher la signature de l'auteur"
 

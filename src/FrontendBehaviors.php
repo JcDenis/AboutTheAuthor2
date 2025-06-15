@@ -42,7 +42,7 @@ class FrontendBehaviors
     public static function publicEntryAfterContent(): void
     {
         if (PluginCommentsWikibar::hasWikiSyntax() && !My::settings()->get('disable_post_signature')) {
-            echo Core::getSignature(App::frontend()->context()->posts->f('user_id'));
+            echo Core::getAbout(App::frontend()->context()->posts->f('user_email'));
         }
     }
 
@@ -52,7 +52,7 @@ class FrontendBehaviors
     public static function publicCommentAfterContent(): void
     {
         if (PluginCommentsWikibar::hasWikiSyntax() && !My::settings()->get('disable_comment_signature')) {
-            echo Core::getSignature(App::frontend()->context()->comments->f('comment_email'), true);
+            echo Core::getAbout(App::frontend()->context()->comments->f('comment_email'));
         }
     }
 
