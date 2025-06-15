@@ -1,35 +1,35 @@
 # Language: Français
-# Module: AboutTheAuthor2 - 0.1
-# Date: 2025-06-08 16:53:55
+# Module: AboutTheAuthor2 - 0.3
+# Date: 2025-06-15 09:45:30
 # Author: , contact@jcdenis.fr
 # Translated with translater 2025.03.03
 
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Project-Id-Version: AboutTheAuthor2 0.1\n"
+"Project-Id-Version: AboutTheAuthor2 0.3\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-06-08T16:53:55+00:00\n"
+"PO-Revision-Date: 2025-06-15T09:45:30+00:00\n"
 "Last-Translator: Jean-Christian Denis\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/BackendBehaviors.php:51
+#: src/BackendBehaviors.php:58
 msgid "Enable users signatures to the end of entries"
 msgstr "Activer les signatures d'utilisateurs à la fin des billets"
 
-#: src/BackendBehaviors.php:57
+#: src/BackendBehaviors.php:64
 msgid "Enable users signatures to the end of comments"
 msgstr "Activer les signatures d'utilisateurs à la fin des commentaires"
 
-#: src/BackendBehaviors.php:63
+#: src/BackendBehaviors.php:70
 msgid "Enable default CSS"
 msgstr "Activer la feuille de style par default"
 
-#: src/BackendBehaviors.php:110
-#: src/FrontendBehaviors.php:117
+#: src/BackendBehaviors.php:121
+#: src/FrontendBehaviors.php:123
 msgid "Signature block:"
 msgstr "Bloc de signature :"
 
@@ -37,6 +37,10 @@ msgstr "Bloc de signature :"
 #: src/Widgets.php:36
 msgid "About the author"
 msgstr "A propos de l'auteur"
+
+#: src/FrontendBehaviors.php:126
+msgid "Signature max length is %s chars long and accept %s syntax."
+msgstr "Signature de %s caractères maximum et accepte la syntaxe %s."
 
 #: src/Widgets.php:34
 msgid "Add a widget of user signature to an entry"

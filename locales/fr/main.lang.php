@@ -1,7 +1,7 @@
 <?php
 // Language: Français
-// Module: AboutTheAuthor2 - 0.1
-// Date: 2025-06-08 16:53:55
+// Module: AboutTheAuthor2 - 0.3
+// Date: 2025-06-15 09:45:30
 // Author: , contact@jcdenis.fr
 // Translated with Translater - 2025.03.03
 
@@ -17,4 +17,5 @@ L10n::$locales['Enable users signatures to the end of comments'] = 'Activer les 
 L10n::$locales['Enable default CSS'] = 'Activer la feuille de style par default';
 L10n::$locales['Signature block:'] = 'Bloc de signature :';
 L10n::$locales['About the author'] = 'A propos de l\'auteur';
+L10n::$locales['Signature max length is %s chars long and accept %s syntax.'] = 'Signature de %s caractères maximum et accepte la syntaxe %s.';
 L10n::$locales['Add a widget of user signature to an entry'] = 'Ajoute un widget de signature de l\'auteur d\'un billet';
