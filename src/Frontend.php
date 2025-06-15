@@ -34,7 +34,6 @@ class Frontend extends Process
             'publicCommentAfterContent'         => FrontendBehaviors::publicCommentAfterContent(...),
             'FrontendSessionAction'             => FrontendBehaviors::FrontendSessionAction(...),
             'FrontendSessionProfil'             => FrontendBehaviors::FrontendSessionProfil(...),
-            'coreInitWikiPost'                  => Core::wikibarInit(...),
         ]);
 
         return true;

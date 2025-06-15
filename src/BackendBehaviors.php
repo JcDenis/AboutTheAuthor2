@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
+use Dotclear\Core\Backend\Page;
 use Dotclear\Database\{ Cursor, MetaRecord };
 use Dotclear\Helper\Html\Form\{ Checkbox, Div, Fieldset, Label, Legend, Para, Text, Textarea };
 use Dotclear\Helper\Html\Html;
@@ -24,15 +25,17 @@ class BackendBehaviors
      */
     public static function adminPageHTMLHead(): void
     {
-        if ($_REQUEST['process'] != 'UserPreferences') {
+        // Limit to user profil pages
+        if (!PluginCommentsWikibar::hasWikiSyntax() || !in_array($_REQUEST['process'], ['User', 'UserPreferences'])) {
             return;
         }
 
-        $format = 'wiki';
+        $format = PluginCommentsWikibar::getWikiMode();
         $editor = App::auth()->getOption('editor');
 
         if (isset($editor[$format])) {
             echo 
+            Page::jsJson(My::id(), ['mode' => $format]) .
             App::behavior()->callBehavior('adminPostEditor', $editor[$format], My::id(), ['#' . My::id() . '_signature'], $format) .
             My::jsLoad('backend');
         }
@@ -85,12 +88,14 @@ class BackendBehaviors
      */
     public static function preferencesForm(): void
     {
-        echo (new Fieldset())
-            ->id(My::id() . '_prefs')
-            ->legend(new Legend(My::name()))
-            ->fields([
-                self::commonForm(App::auth()->prefs()->get(My::id())->get('user_signature')),
-            ])->render();
+        if (PluginCommentsWikibar::hasWikiSyntax()) {
+            echo (new Fieldset())
+                ->id(My::id() . '_prefs')
+                ->legend(new Legend(My::name()))
+                ->fields([
+                    self::commonForm(App::auth()->prefs()->get(My::id())->get('user_signature')),
+                ])->render();
+        }
     }
 
     /**
@@ -98,7 +103,9 @@ class BackendBehaviors
      */
     public static function userForm(?MetaRecord $rs): void
     {
-        echo self::commonForm(is_null($rs)  || $rs->isEmpty() ? '' : (string) App::userPreferences()->createFromUser($rs->f('user_id'))->get(My::id())->get('user_signature'))->render();
+        if (PluginCommentsWikibar::hasWikiSyntax()) {
+            echo self::commonForm(is_null($rs)  || $rs->isEmpty() ? '' : (string) App::userPreferences()->createFromUser($rs->f('user_id'))->get(My::id())->get('user_signature'))->render();
+        }
     }
 
     /**
@@ -120,13 +127,15 @@ class BackendBehaviors
      */
     public static function updateUser(Cursor $cur, string $user_id = ''): void
     {
-        App::userPreferences()->createFromUser($user_id)->get(My::id())->put(
-            'user_signature',
-            $_POST[My::id() . '_signature'] ?? '',
-            'string',
-            'user signature',
-            true,
-            false
-        );
+        if (PluginCommentsWikibar::hasWikiSyntax()) {
+            App::userPreferences()->createFromUser($user_id)->get(My::id())->put(
+                'user_signature',
+                $_POST[My::id() . '_signature'] ?? '',
+                'string',
+                'user signature',
+                true,
+                false
+            );
+        }
     }
 }

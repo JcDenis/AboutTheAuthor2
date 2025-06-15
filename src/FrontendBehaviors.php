@@ -31,7 +31,9 @@ class FrontendBehaviors
         }
 
         // JS for wikibar
-        Core::wikibarHead();
+        if (PluginCommentsWikibar::hasWikiSyntax() &&  App::url()->getType() === 'FrontendSession') {
+            PluginCommentsWikibar::headContent();
+        }
     }
 
     /**
@@ -39,7 +41,7 @@ class FrontendBehaviors
      */
     public static function publicEntryAfterContent(): void
     {
-        if (!My::settings()->get('disable_post_signature')) {
+        if (PluginCommentsWikibar::hasWikiSyntax() && !My::settings()->get('disable_post_signature')) {
             echo Core::getSignature(App::frontend()->context()->posts->f('user_id'));
         }
     }
@@ -49,7 +51,7 @@ class FrontendBehaviors
      */
     public static function publicCommentAfterContent(): void
     {
-        if (!My::settings()->get('disable_comment_signature')) {
+        if (PluginCommentsWikibar::hasWikiSyntax() && !My::settings()->get('disable_comment_signature')) {
             echo Core::getSignature(App::frontend()->context()->comments->f('comment_email'), true);
         }
     }
@@ -76,14 +78,16 @@ class FrontendBehaviors
                 App::auth()->sudo(App::users()->updUser(...), $user_id, $cur);
 
                 // change user signature
-                App::auth()->prefs()->get(My::id())->put(
-                    'user_signature',
-                    substr($user_signature, 0, Core::SIGNATURE_MAX_LENGTH),
-                    'string',
-                    'user signature',
-                    true,
-                    false
-                );
+                if (PluginCommentsWikibar::hasWikiSyntax()) {
+                    App::auth()->prefs()->get(My::id())->put(
+                        'user_signature',
+                        substr($user_signature, 0, Core::SIGNATURE_MAX_LENGTH),
+                        'string',
+                        'user signature',
+                        true,
+                        false
+                    );
+                }
 
                 // reload user
                 App::auth()->checkUser($user_id);
@@ -101,23 +105,30 @@ class FrontendBehaviors
     public static function FrontendSessionProfil(FrontendSessionProfil $profil): void
     {
         if (App::auth()->userID() != '') {
-            $profil->addAction(My::id(), __('Profil'), [
+            $fields = [
                 // user_site
                 $profil->getInputfield([
                     (new Input(My::id() . '_url'))
                         ->size(30)
-                        ->maxlength(255)
+                        ->maxlength(Core::SIGNATURE_MAX_LENGTH)
                         ->value(Html::escapeHTML(App::auth()->getInfo('user_url')))
                         ->label(new Label(__('Your site URL:'), Label::OL_TF)),
-                ]),
-                $profil->getInputfield([
+                ])
+            ];
+
+            if (PluginCommentsWikibar::hasWikiSyntax()) {
+                $fields[] = $profil->getInputfield([
                     (new Textarea(My::id() . '_signature', Html::escapeHTML((string) App::auth()->prefs()->get(My::id())->get('user_signature'))))
                         ->rows(4)
                         ->label((new Label(__('Signature block:'), Label::OL_TF))),
                     (new Note())
                         ->class('note')
-                        ->text(__('Signature max length is 205 chars long and accept wiki syntax.')),
-                ]),
+                        ->text(sprintf(__('Signature max length is %s chars long and accept %s syntax.'), Core::SIGNATURE_MAX_LENGTH, PluginCommentsWikibar::getWikiMode())),
+                ]);
+            }
+
+            $profil->addAction(My::id(), __('Profil'), [
+                ...$fields,
                 $profil->getControlset(My::id(), __('Save')),
             ]);
         }

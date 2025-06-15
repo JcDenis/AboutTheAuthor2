@@ -6,7 +6,7 @@ namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
 use Dotclear\Helper\Html\{ Html, WikiToHtml };
-use Dotclear\Plugin\commentsWikibar\My as Wb;
+use Dotclear\Plugin\commentsWikibar\My as Wikibar;
 
 /**
  * @brief       AboutTheAuthor2 module frontend behaviors.
@@ -15,22 +15,14 @@ use Dotclear\Plugin\commentsWikibar\My as Wb;
  * @author      Jean-Christian Paul Denis
  * @copyright   AGPL-3.0
  */
-class PluginCommentWikibar
+class PluginCommentsWikibar
 {
     /**
      * Load JS and CSS and add wiki bar.
      */
     public static function headContent(): void
     {
-        // wiki, taken from plugin commentsWikibar
-        if (!App::plugins()->moduleExists('commentsWikibar')
-            || !Wb::settings()->get('active')
-            || App::url()->getType() !== 'FrontendSession'
-        ) {
-            return;
-        }
-
-        $settings = Wb::settings();
+        $settings = Wikibar::settings();
         // CSS
         if ($settings->add_css) {
             $custom_css = trim((string) $settings->custom_css);
@@ -47,7 +39,7 @@ class PluginCommentWikibar
 
                 $css = App::plugins()->cssLoad($css_file);
             } else {
-                $css = Wb::cssLoad('wikibar.css');
+                $css = Wikibar::cssLoad('wikibar.css');
             }
 
             echo $css;
@@ -67,24 +59,18 @@ class PluginCommentWikibar
 
                 $js = App::plugins()->jsLoad($js_file);
             } else {
-                $js = Wb::jsLoad('wikibar.js');
+                $js = Wikibar::jsLoad('wikibar.js');
             }
 
             echo $js;
         }
 
         if ($settings->add_jsglue) {
-            $mode = 'wiki';
-            // Formatting Markdown activated
-            if (App::blog()->settings()->system->markdown_comments) {
-                $mode = 'markdown';
-            }
-
             echo
             Html::jsJson('commentswikibar', [
                 'base_url'   => App::blog()->host(),
                 'id'         => My::id() . '_signature',
-                'mode'       => $mode,
+                'mode'       => self::getWikiMode(),
                 'legend_msg' => __('You can use the following shortcuts to format your text.'),
                 'label'      => __('Text formatting'),
                 'elements'   => [
@@ -115,54 +101,23 @@ class PluginCommentWikibar
                     'no_url'    => $settings->no_url,
                 ],
             ]) .
-            Wb::jsLoad('bootstrap.js');
+            Wikibar::jsLoad('bootstrap.js');
         }
     }
 
     /**
-     * Init wiki syntax for post form.
+     * Get comments syntax mode.
      */
-    public static function coreInitWikiPost(WikiToHtml $wiki): string
+    public static function getWikiMode(): string
     {
-        if (!App::plugins()->moduleExists('commentsWikibar')
-            || !Wb::settings()->get('active')
-            || App::url()->getType() != My::id()
-        ) {
-            return '';
-        }
+        return App::blog()->settings()->get('system')->get('markdown_comments') ? 'markdown' : 'wiki';
+    }
 
-        $settings = Wb::settings();
-        if ($settings->no_format) {
-            $wiki->setOpt('active_strong', 0);
-            $wiki->setOpt('active_em', 0);
-            $wiki->setOpt('active_ins', 0);
-            $wiki->setOpt('active_del', 0);
-            $wiki->setOpt('active_q', 0);
-            $wiki->setOpt('active_code', 0);
-        }
-
-        if ($settings->no_br) {
-            $wiki->setOpt('active_br', 0);
-        }
-
-        if ($settings->no_list) {
-            $wiki->setOpt('active_lists', 0);
-        }
-
-        if ($settings->no_pre) {
-            $wiki->setOpt('active_pre', 0);
-        }
-
-        if ($settings->no_quote) {
-            $wiki->setOpt('active_quote', 0);
-        } elseif (App::blog()->settings()->system->wiki_comments) {
-            $wiki->setOpt('active_quote', 1);
-        }
-
-        if ($settings->no_url) {
-            $wiki->setOpt('active_urls', 0);
-        }
-
-        return '';
+    /**
+     * Check requirements.
+     */
+    public static function hasWikiSyntax(): bool
+    {
+        return App::plugins()->moduleExists('commentsWikibar') && Wikibar::settings()->get('active');
     }
 }
