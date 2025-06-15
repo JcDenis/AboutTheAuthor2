@@ -1,7 +1,7 @@
 <?php
 // Language: Français
-// Module: AboutTheAuthor2 - 0.3
-// Date: 2025-06-15 21:52:31
+// Module: AboutTheAuthor2 - 0.4
+// Date: 2025-06-15 22:08:06
 // Author: , contact@jcdenis.fr
 // Translated with Translater - 2025.03.03
 
@@ -19,6 +19,14 @@ L10n::$locales['Show author entries count'] = 'Afficher le nombre de billets de 
 L10n::$locales['Show author comments count'] = 'Afficher le nombre de commentaires de l\'auteur';
 L10n::$locales['Signature block:'] = 'Bloc de signature :';
 L10n::$locales['About the author'] = 'A propos de l\'auteur';
+L10n::$locales['one entry'] = [
+	'une publication',
+	'%s publications',
+];
+L10n::$locales['one comment'] = [
+	'un commentaire',
+	'%s commentaires',
+];
 L10n::$locales['Signature max length is %s chars long and accept %s syntax.'] = 'Signature de %s caractères maximum et accepte la syntaxe %s.';
 L10n::$locales['Add a widget of user signature to an entry'] = 'Ajoute un widget de signature de l\'auteur d\'un billet';
 L10n::$locales['Show user signature'] = 'Afficher la signature de l\'auteur';

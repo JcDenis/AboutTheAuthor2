@@ -1,15 +1,15 @@
 # Language: Français
-# Module: AboutTheAuthor2 - 0.3
-# Date: 2025-06-15 21:52:31
+# Module: AboutTheAuthor2 - 0.4
+# Date: 2025-06-15 22:08:06
 # Author: , contact@jcdenis.fr
 # Translated with translater 2025.03.03
 
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Project-Id-Version: AboutTheAuthor2 0.3\n"
+"Project-Id-Version: AboutTheAuthor2 0.4\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-06-15T21:52:31+00:00\n"
+"PO-Revision-Date: 2025-06-15T22:08:06+00:00\n"
 "Last-Translator: Jean-Christian Denis\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,6 +47,18 @@ msgstr "Bloc de signature :"
 #: src/Widgets.php:36
 msgid "About the author"
 msgstr "A propos de l'auteur"
+
+#: src/Core.php:151
+msgid "one entry"
+msgid_plural "%s entries"
+msgstr[0] "une publication"
+msgstr[1] "%s publications"
+
+#: src/Core.php:185
+msgid "one comment"
+msgid_plural "%s comments"
+msgstr[0] "un commentaire"
+msgstr[1] "%s commentaires"
 
 #: src/FrontendBehaviors.php:126
 msgid "Signature max length is %s chars long and accept %s syntax."
