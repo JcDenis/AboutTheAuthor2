@@ -1,3 +1,7 @@
+AboutTheAuhtor2 0.3 - 2025.06.15
+===========================================================
+* Use plugins commentsWikibar and legacyMarkdown settings
+
 AboutTheAuhtor2 0.2 - 2025.06.12
 ===========================================================
 * Fix backend script

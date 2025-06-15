@@ -16,22 +16,22 @@ declare(strict_types=1);
 
 $this->registerModule(
     'About the author',
-    'Allow user to post from frontend.',
     'Displays information about the author of entries or comments',
-    '0.2',
+    'Jean-Christian Paul Denis and Contributors',
+    '0.3',
     [
         'requires'    => [
             ['core', '2.34'],
             //['FrontendSession', '0.30'], // optional
-            //['commentsWikibar', '5.4'], // optional
-            //['legacyMarkdown', '7.0'], // optional
+            //['commentsWikibar', '6.4'], // optional
+            //['legacyMarkdown', '7.8'], // optional
         ],
         'settings'    => [
             'blog' => '#params.' . $this->id . '_params',
             'pref' => '#user-options.' . $this->id . '_prefs',
         ],
         'permissions' => 'My',
-        'priority'    => 3000,
+        'priority'    => 3000, // somewhere after plugin FrontendSession
         'type'        => 'plugin',
         'support'     => 'https://github.com/JcDenis/' . $this->id . '/issues',
         'details'     => 'https://github.com/JcDenis/' . $this->id . '/',
