@@ -7,7 +7,7 @@ namespace Dotclear\Plugin\AboutTheAuthor2;
 use Dotclear\App;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Database\{ Cursor, MetaRecord };
-use Dotclear\Helper\Html\Form\{ Checkbox, Div, Fieldset, Label, Legend, Para, Text, Textarea };
+use Dotclear\Helper\Html\Form\{ Checkbox, Div, Fieldset, Img, Label, Legend, Para, Textarea };
 use Dotclear\Helper\Html\Html;
 use Dotclear\Interface\Core\BlogSettingsInterface;
 
@@ -26,7 +26,7 @@ class BackendBehaviors
     public static function adminPageHTMLHead(): void
     {
         // Limit to user profil pages
-        if (!PluginCommentsWikibar::hasWikiSyntax() || !in_array($_REQUEST['process'], ['User', 'UserPreferences'])) {
+        if (!PluginCommentsWikibar::hasWikiSyntax() || !in_array($_REQUEST['process'] ?? '', ['User', 'UserPreferences'])) {
             return;
         }
 
@@ -46,11 +46,9 @@ class BackendBehaviors
      */
     public static function adminBlogPreferencesFormV2(BlogSettingsInterface $blog_settings): void
     {
-        echo (new Div())
-            ->class('fieldset')
+        echo (new Fieldset(My::id() . '_params'))
+            ->legend(new Legend((new Img(My::icons()[0]))->class('icon-small')->render() . ' ' . My::name()))
             ->items([
-                (new Text('h4', My::name()))
-                    ->id(My::id() . '_params'),
                 (new Div())
                     ->class('two-cols')
                     ->items([
@@ -117,7 +115,7 @@ class BackendBehaviors
         if (PluginCommentsWikibar::hasWikiSyntax()) {
             echo (new Fieldset())
                 ->id(My::id() . '_prefs')
-                ->legend(new Legend(My::name()))
+                ->legend(new Legend((new Img(My::icons()[0]))->class('icon-small')->render() . ' ' . My::name()))
                 ->fields([
                     self::commonForm(App::auth()->prefs()->get(My::id())->get('user_signature')),
                 ])->render();
