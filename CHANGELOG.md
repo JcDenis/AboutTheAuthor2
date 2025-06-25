@@ -1,3 +1,8 @@
+AboutTheAuhtor2 0.5 - 2025.06.26
+===========================================================
+* Add icon
+* Standardize backend blocs
+
 AboutTheAuhtor2 0.4 - 2025.06.15
 ===========================================================
 * Add author posts and comments count
