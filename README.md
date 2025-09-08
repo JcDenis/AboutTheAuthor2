@@ -2,7 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/jcdenis/AboutTheAuthor2?color=lightblue)](https://github.com/JcDenis/AboutTheAuthor2/releases)
 ![Date](https://img.shields.io/github/release-date/jcdenis/AboutTheAuthor2?color=red)
-[![Dotclear](https://img.shields.io/badge/dotclear-v2.34-137bbb.svg)](https://fr.dotclear.org/download)
+[![Dotclear](https://img.shields.io/badge/dotclear-v2.36-137bbb.svg)](https://fr.dotclear.org/download)
 [![Dotaddict](https://img.shields.io/badge/dotaddict-official-9ac123.svg)](https://plugins.dotaddict.org/dc2/details/AboutTheAuthor2)
 [![License](https://img.shields.io/github/license/jcdenis/AboutTheAuthor2?color=white)](https://github.com/JcDenis/AboutTheAuthor2/blob/master/LICENSE)
 
@@ -14,7 +14,7 @@ _AboutTheAuthor2_ is a plugin for the open-source web publishing software called
 
 ## REQUIREMENTS
 
-* Dotclear 2.34
+* Dotclear 2.36
 * PHP 8.1+
 * Dotclear admin permission for configuration
 
