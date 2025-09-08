@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
-use Dotclear\Core\Process;
+use Dotclear\Helper\Process\TraitProcess;
 
 /**
  * @brief       AboutTheAuthor2 module backend process.
@@ -14,8 +14,10 @@ use Dotclear\Core\Process;
  * @author      Jean-Christian Paul Denis
  * @copyright   AGPL-3.0
  */
-class Backend extends Process
+class Backend
 {
+    use TraitProcess;
+
     public static function init(): bool
     {
         return self::status(My::checkContext(My::BACKEND));
