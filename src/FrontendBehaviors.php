@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\AboutTheAuthor2;
 
-use Throwable;
 use Dotclear\App;
-use Dotclear\Helper\Html\Form\{ Input, Label, Note, Textarea };
+use Dotclear\Helper\Html\Form\Input;
+use Dotclear\Helper\Html\Form\Label;
+use Dotclear\Helper\Html\Form\Note;
+use Dotclear\Helper\Html\Form\Textarea;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\FrontendSession\FrontendSessionProfil;
+use Throwable;
 
 /**
  * @brief       AboutTheAuthor2 module frontend behaviors.

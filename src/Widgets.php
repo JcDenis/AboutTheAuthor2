@@ -6,8 +6,10 @@ namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
 use Dotclear\Helper\Html\Html;
-use Dotclear\Helper\Html\Form\{ Li, Ul };
-use Dotclear\Plugin\widgets\{ WidgetsStack, WidgetsElement };
+use Dotclear\Helper\Html\Form\Li;
+use Dotclear\Helper\Html\Form\Ul;
+use Dotclear\Plugin\widgets\WidgetsStack;
+use Dotclear\Plugin\widgets\WidgetsElement;
 
 /**
  * @brief       AboutTheAuthor2 widgets class.

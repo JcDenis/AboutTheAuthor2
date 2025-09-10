@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
-use Dotclear\Helper\Html\{ Html, WikiToHtml };
+use Dotclear\Helper\Html\Html;
+use Dotclear\Helper\Html\WikiToHtml;
 use Dotclear\Plugin\commentsWikibar\My as Wikibar;
 
 /**

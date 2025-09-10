@@ -6,8 +6,10 @@ namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use ArrayObject;
 use Dotclear\App;
-use Dotclear\Database\Statement\{ JoinStatement, SelectStatement };
-use Dotclear\Helper\Html\Form\{ Div, Text };
+use Dotclear\Database\Statement\JoinStatement;
+use Dotclear\Database\Statement\SelectStatement;
+use Dotclear\Helper\Html\Form\Div;
+use Dotclear\Helper\Html\Form\Text;
 
 /**
  * @brief       AboutTheAuthor2 module core class.
