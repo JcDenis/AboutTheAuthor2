@@ -134,11 +134,11 @@ class Core
             $sql = new SelectStatement();
             $rs = $sql
                 ->column($sql->count($sql->unique('P.post_id')))
-                ->from($sql->as(App::con()->prefix() . App::blog()::POST_TABLE_NAME, 'P'), false, true)
+                ->from($sql->as(App::db()->con()->prefix() . App::blog()::POST_TABLE_NAME, 'P'), false, true)
                 ->join(
                     (new JoinStatement())
                         ->inner()
-                        ->from($sql->as(App::con()->prefix() . App::auth()::USER_TABLE_NAME, 'U'))
+                        ->from($sql->as(App::db()->con()->prefix() . App::auth()::USER_TABLE_NAME, 'U'))
                         ->on('U.user_id = P.user_id')
                         ->statement()
                 )
@@ -168,11 +168,11 @@ class Core
             $sql = new SelectStatement();
             $rs = $sql
                 ->column($sql->count($sql->unique('comment_id')))
-                ->from($sql->as(App::con()->prefix() . App::blog()::COMMENT_TABLE_NAME, 'C'))
+                ->from($sql->as(App::db()->con()->prefix() . App::blog()::COMMENT_TABLE_NAME, 'C'))
                 ->join(
                     (new JoinStatement())
                         ->inner()
-                        ->from($sql->as(App::con()->prefix() . App::blog()::POST_TABLE_NAME, 'P'))
+                        ->from($sql->as(App::db()->con()->prefix() . App::blog()::POST_TABLE_NAME, 'P'))
                         ->on('C.post_id = P.post_id')
                         ->statement()
                 )
@@ -201,7 +201,7 @@ class Core
             $sql = new SelectStatement();
             $rs = $sql
                 ->column('user_id')
-                ->from(App::con()->prefix() . App::auth()::USER_TABLE_NAME)
+                ->from(App::db()->con()->prefix() . App::auth()::USER_TABLE_NAME)
                 ->where('user_email = ' . $sql->quote($user_email))
                 ->limit(1)
                 ->select();
