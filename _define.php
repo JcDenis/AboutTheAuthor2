@@ -18,7 +18,7 @@ $this->registerModule(
     'About the author',
     'Displays information about the author of entries or comments',
     'Jean-Christian Paul Denis and Contributors',
-    '0.6',
+    '0.6.1',
     [
         'requires'    => [
             ['core', '2.36'],
