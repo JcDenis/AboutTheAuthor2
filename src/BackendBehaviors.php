@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
-use Dotclear\Core\Backend\Page;
 use Dotclear\Database\{ Cursor, MetaRecord };
 use Dotclear\Helper\Html\Form\{ Checkbox, Div, Fieldset, Img, Label, Legend, Para, Textarea };
 use Dotclear\Helper\Html\Html;
@@ -35,7 +34,7 @@ class BackendBehaviors
 
         if (isset($editor[$format])) {
             echo 
-            Page::jsJson(My::id(), ['mode' => $format]) .
+            App::backend()->page()->jsJson(My::id(), ['mode' => $format]) .
             App::behavior()->callBehavior('adminPostEditor', $editor[$format], My::id(), ['#' . My::id() . '_signature'], $format) .
             My::jsLoad('backend');
         }

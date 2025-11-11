@@ -1,9 +1,9 @@
 <?php
 // Language: Français
-// Module: AboutTheAuthor2 - 0.4
-// Date: 2025-06-15 22:08:06
+// Module: AboutTheAuthor2 - 0.6.1
+// Date: 2025-11-11 14:23:14
 // Author: , contact@jcdenis.fr
-// Translated with Translater - 2025.03.03
+// Translated with Translater - 2025.09.11
 
 
 #
@@ -28,5 +28,6 @@ L10n::$locales['one comment'] = [
 	'%s commentaires',
 ];
 L10n::$locales['Signature max length is %s chars long and accept %s syntax.'] = 'Signature de %s caractères maximum et accepte la syntaxe %s.';
+L10n::$locales['Profile'] = 'Profil';
 L10n::$locales['Add a widget of user signature to an entry'] = 'Ajoute un widget de signature de l\'auteur d\'un billet';
 L10n::$locales['Show user signature'] = 'Afficher la signature de l\'auteur';

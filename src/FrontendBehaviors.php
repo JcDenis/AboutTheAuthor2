@@ -95,7 +95,7 @@ class FrontendBehaviors
                 // reload user
                 App::auth()->checkUser($user_id);
 
-                App::frontend()->context()->frontend_session->success = __('Profil successfully updated.');
+                App::frontend()->context()->frontend_session->success = __('Profile successfully updated.');
             } catch (Throwable $e) {
                 App::frontend()->context()->form_error = $e->getMessage();
             }
@@ -130,7 +130,7 @@ class FrontendBehaviors
                 ]);
             }
 
-            $profil->addAction(My::id(), __('Profil'), [
+            $profil->addAction(My::id(), __('Profile'), [
                 ...$fields,
                 $profil->getControlset(My::id(), __('Save')),
             ]);
