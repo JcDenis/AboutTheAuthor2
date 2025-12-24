@@ -54,7 +54,12 @@ class FrontendBehaviors
      */
     public static function publicCommentAfterContent(): void
     {
-        if (App::frontend()->context()->exists('posts') && PluginCommentsWikibar::hasWikiSyntax() && !My::settings()->get('disable_comment_signature')) {
+        if (App::frontend()->context()->exists('posts') 
+            && App::frontend()->context()->exists('comments') 
+            && !App::frontend()->context()->comments->f('comment_trackback')
+            && PluginCommentsWikibar::hasWikiSyntax() 
+            && !My::settings()->get('disable_comment_signature')
+        ) {
             echo Core::getAbout(App::frontend()->context()->comments->f('comment_email'));
         }
     }
