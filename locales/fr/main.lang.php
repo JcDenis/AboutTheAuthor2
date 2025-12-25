@@ -1,7 +1,7 @@
 <?php
 // Language: Français
-// Module: AboutTheAuthor2 - 0.6.3
-// Date: 2025-12-25 19:54:39
+// Module: AboutTheAuthor2 - 0.7
+// Date: 2025-12-25 20:30:42
 // Author: JcDeniss, contact@jcdenis.fr
 // Translated with Translater - 2025.09.11
 
@@ -17,6 +17,7 @@ L10n::$locales['Enable users signatures to the end of comments'] = 'Activer les 
 L10n::$locales['Enable default CSS'] = 'Activer la feuille de style par default';
 L10n::$locales['Show author entries count'] = 'Afficher le nombre de billets de l\'auteur';
 L10n::$locales['Show author comments count'] = 'Afficher le nombre de commentaires de l\'auteur';
+L10n::$locales['Disable user to change his displayname'] = 'Désactiver le changement de pseudo de l\'utilisateur';
 L10n::$locales['Signature block:'] = 'Bloc de signature :';
 L10n::$locales['About the author'] = 'A propos de l\'auteur';
 L10n::$locales['one entry'] = [

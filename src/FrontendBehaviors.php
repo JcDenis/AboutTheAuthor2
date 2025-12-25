@@ -70,11 +70,16 @@ class FrontendBehaviors
     public static function FrontendSessionAction(string $action): void
     {
         if ($action == My::id() && App::auth()->userID() != '') {
-            $user_displayname = $_POST[My::id() . '_displayname'];
+            if (!My::settings()->get('disable_displayname')) {
+                $user_displayname = $_POST[My::id() . '_displayname'];
+            }
             $user_url         = $_POST[My::id() . '_url'];
             $user_signature   = $_POST[My::id() . '_signature'];
 
-            if (!preg_match('/^[A-Za-z0-9._-]{3,}$/', (string) $user_displayname)) {
+            if (!My::settings()->get('disable_displayname') 
+                && trim($user_displayname) !== '' 
+                && !preg_match('/^[A-Za-z0-9._-]{3,}$/', (string) $user_displayname)
+            ) {
                 $user_displayname = App::auth()->getInfo('user_displayname');
             }
             if (!preg_match('|^https?://|', (string) $user_url)) {
@@ -86,7 +91,9 @@ class FrontendBehaviors
             try {
                 // change user displayname and url
                 $cur = App::auth()->openUserCursor();
-                $cur->setField('user_displayname', $user_displayname);
+                if (!My::settings()->get('disable_displayname')) {
+                    $cur->setField('user_displayname', trim($user_displayname));
+                }
                 $cur->setField('user_url', $user_url);
                 App::auth()->sudo(App::users()->updUser(...), $user_id, $cur);
 
@@ -118,25 +125,27 @@ class FrontendBehaviors
     public static function FrontendSessionProfil(FrontendSessionProfil $profil): void
     {
         if (App::auth()->userID() != '') {
-            $fields = [
+            $fields = [];
+
+            if (!My::settings()->get('disable_displayname')) {
                 // user displayname
-                $profil->getInputfield([
-                    (new Input(My::id() . '_displayname'))
-                        ->size(30)
-                        ->maxlength(Core::SIGNATURE_MAX_LENGTH)
-                        ->value(Html::escapeHTML(App::auth()->getInfo('user_displayname')))
-                        ->required(true)
-                        ->label(new Label(__('Display name:'), Label::OL_TF)),
-                ]),
-                // user_site
-                $profil->getInputfield([
-                    (new Input(My::id() . '_url'))
-                        ->size(30)
-                        ->maxlength(Core::SIGNATURE_MAX_LENGTH)
-                        ->value(Html::escapeHTML(App::auth()->getInfo('user_url')))
-                        ->label(new Label(__('Your site URL:'), Label::OL_TF)),
-                ])
-            ];
+                $fields[] = $profil->getInputfield([
+                        (new Input(My::id() . '_displayname'))
+                            ->size(30)
+                            ->maxlength(255)
+                            ->value(Html::escapeHTML(App::auth()->getInfo('user_displayname')))
+                            ->required(true)
+                            ->label(new Label(__('Display name:'), Label::OL_TF)),
+                    ]);
+            }
+            // user_site
+            $fields[] = $profil->getInputfield([
+                (new Input(My::id() . '_url'))
+                    ->size(30)
+                    ->maxlength(255)
+                    ->value(Html::escapeHTML(App::auth()->getInfo('user_url')))
+                    ->label(new Label(__('Your site URL:'), Label::OL_TF)),
+            ]);
 
             if (PluginCommentsWikibar::hasWikiSyntax()) {
                 $fields[] = $profil->getInputfield([

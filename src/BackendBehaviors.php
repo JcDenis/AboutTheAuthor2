@@ -88,6 +88,12 @@ class BackendBehaviors
                                             ->value(1)
                                             ->label(new Label(__("Show author comments count"), Label::IL_FT)),
                                     ]),
+                                (new Para())
+                                    ->items([
+                                        (new Checkbox(My::id() . 'disable_displayname', (bool) $blog_settings->get(My::id())->get('disable_displayname')))
+                                            ->value(1)
+                                            ->label(new Label(__("Disable user to change his displayname"), Label::IL_FT)),
+                                    ]),
                             ]),
                     ]),
             ])
