@@ -134,7 +134,6 @@ class FrontendBehaviors
                             ->size(30)
                             ->maxlength(255)
                             ->value(Html::escapeHTML(App::auth()->getInfo('user_displayname')))
-                            ->required(true)
                             ->label(new Label(__('Display name:'), Label::OL_TF)),
                     ]);
             }
