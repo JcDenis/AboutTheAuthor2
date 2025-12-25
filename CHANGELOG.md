@@ -1,3 +1,8 @@
+AboutTheAuhtor2 0.7 - 2025.12.25
+===========================================================
+* Add user displayname to user profil
+* Various fixes
+
 AboutTheAuhtor2 0.6 - 2025.09.08
 ===========================================================
 * Bump Dotclear from 2.34 to 2.36
