@@ -70,9 +70,13 @@ class FrontendBehaviors
     public static function FrontendSessionAction(string $action): void
     {
         if ($action == My::id() && App::auth()->userID() != '') {
-            $user_url       = $_POST[My::id() . '_url'];
-            $user_signature = $_POST[My::id() . '_signature'];
+            $user_displayname = $_POST[My::id() . '_displayname'];
+            $user_url         = $_POST[My::id() . '_url'];
+            $user_signature   = $_POST[My::id() . '_signature'];
 
+            if (!preg_match('/^[A-Za-z0-9._-]{3,}$/', (string) $user_displayname)) {
+                $user_displayname = App::auth()->getInfo('user_displayname');
+            }
             if (!preg_match('|^https?://|', (string) $user_url)) {
                 $user_url = 'http://' . $user_url;
             }
@@ -80,8 +84,9 @@ class FrontendBehaviors
             $user_id  = (string) App::auth()->userID();
 
             try {
-                // change user url
+                // change user displayname and url
                 $cur = App::auth()->openUserCursor();
+                $cur->setField('user_displayname', $user_displayname);
                 $cur->setField('user_url', $user_url);
                 App::auth()->sudo(App::users()->updUser(...), $user_id, $cur);
 
@@ -114,6 +119,15 @@ class FrontendBehaviors
     {
         if (App::auth()->userID() != '') {
             $fields = [
+                // user displayname
+                $profil->getInputfield([
+                    (new Input(My::id() . '_displayname'))
+                        ->size(30)
+                        ->maxlength(Core::SIGNATURE_MAX_LENGTH)
+                        ->value(Html::escapeHTML(App::auth()->getInfo('user_displayname')))
+                        ->required(true)
+                        ->label(new Label(__('Display name:'), Label::OL_TF)),
+                ]),
                 // user_site
                 $profil->getInputfield([
                     (new Input(My::id() . '_url'))

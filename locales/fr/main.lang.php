@@ -1,8 +1,8 @@
 <?php
 // Language: Français
-// Module: AboutTheAuthor2 - 0.6.1
-// Date: 2025-11-11 14:23:14
-// Author: , contact@jcdenis.fr
+// Module: AboutTheAuthor2 - 0.6.3
+// Date: 2025-12-25 19:54:39
+// Author: JcDeniss, contact@jcdenis.fr
 // Translated with Translater - 2025.09.11
 
 

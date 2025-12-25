@@ -1,16 +1,16 @@
 # Language: Français
-# Module: AboutTheAuthor2 - 0.6.1
-# Date: 2025-11-11 14:23:14
-# Author: , contact@jcdenis.fr
+# Module: AboutTheAuthor2 - 0.6.3
+# Date: 2025-12-25 19:54:39
+# Author: JcDeniss, contact@jcdenis.fr
 # Translated with translater 2025.09.11
 
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Project-Id-Version: AboutTheAuthor2 0.6.1\n"
+"Project-Id-Version: AboutTheAuthor2 0.6.3\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-11-11T14:23:14+00:00\n"
-"Last-Translator: Jean-Christian Denis\n"
+"PO-Revision-Date: 2025-12-25T19:54:39+00:00\n"
+"Last-Translator: JcDeniss\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,7 +39,7 @@ msgid "Show author comments count"
 msgstr "Afficher le nombre de commentaires de l'auteur"
 
 #: src/BackendBehaviors.php:144
-#: src/FrontendBehaviors.php:126
+#: src/FrontendBehaviors.php:145
 msgid "Signature block:"
 msgstr "Bloc de signature :"
 
@@ -60,11 +60,11 @@ msgid_plural "%s comments"
 msgstr[0] "un commentaire"
 msgstr[1] "%s commentaires"
 
-#: src/FrontendBehaviors.php:129
+#: src/FrontendBehaviors.php:148
 msgid "Signature max length is %s chars long and accept %s syntax."
 msgstr "Signature de %s caractères maximum et accepte la syntaxe %s."
 
-#: src/FrontendBehaviors.php:133
+#: src/FrontendBehaviors.php:152
 msgid "Profile"
 msgstr "Profil"
 
