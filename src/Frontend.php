@@ -31,6 +31,7 @@ class Frontend
 
         App::behavior()->addBehaviors([
             'initWidgets'                       => Widgets::initWidgets(...),
+            'initCommentsWikibar'               => FrontendBehaviors::initCommentsWikibar(...),
             'publicHeadContent'                 => FrontendBehaviors::publicHeadContent(...),
             'publicEntryAfterContent'           => FrontendBehaviors::publicEntryAfterContent(...),
             'publicCommentAfterContent'         => FrontendBehaviors::publicCommentAfterContent(...),

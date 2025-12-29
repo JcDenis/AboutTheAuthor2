@@ -23,6 +23,18 @@ use Throwable;
 class FrontendBehaviors
 {
     /**
+     * Tools fo wikibar.
+     *
+     * @param   ArrayObject<array-key, string>  $supported_modes
+     */
+    public static function initCommentsWikibar(ArrayObject $supported_modes): string
+    {
+        $supported_modes->append('FrontendSession');
+
+        return '';
+    }
+
+    /**
      * Load JS and CSS and add wiki bar to session signature form.
      */
     public static function publicHeadContent(): void
