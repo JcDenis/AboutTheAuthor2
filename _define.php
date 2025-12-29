@@ -18,12 +18,12 @@ $this->registerModule(
     'About the author',
     'Displays information about the author of entries or comments',
     'Jean-Christian Paul Denis and Contributors',
-    '0.7.1',
+    '0.7.2',
     [
         'requires'    => [
             ['core', '2.36'],
             //['FrontendSession', '0.30'], // optional
-            //['commentsWikibar', '6.4'], // optional
+            //['commentsWikibar', '7.5'], // optional
             //['legacyMarkdown', '7.8'], // optional
         ],
         'settings'    => [
