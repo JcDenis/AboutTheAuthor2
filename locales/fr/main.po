@@ -1,15 +1,15 @@
 # Language: Français
-# Module: AboutTheAuthor2 - 0.7
-# Date: 2025-12-25 20:30:42
+# Module: AboutTheAuthor2 - 0.7.3.1
+# Date: 2026-06-07 09:06:58
 # Author: JcDeniss, contact@jcdenis.fr
 # Translated with translater 2025.09.11
 
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Project-Id-Version: AboutTheAuthor2 0.7\n"
+"Project-Id-Version: AboutTheAuthor2 0.7.3.1\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-12-25T20:30:42+00:00\n"
+"PO-Revision-Date: 2026-06-07T09:06:58+00:00\n"
 "Last-Translator: JcDeniss\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgid "Disable user to change his displayname"
 msgstr "Désactiver le changement de pseudo de l'utilisateur"
 
 #: src/BackendBehaviors.php:150
-#: src/FrontendBehaviors.php:154
+#: src/FrontendBehaviors.php:166
 msgid "Signature block:"
 msgstr "Bloc de signature :"
 
@@ -64,11 +64,19 @@ msgid_plural "%s comments"
 msgstr[0] "un commentaire"
 msgstr[1] "%s commentaires"
 
-#: src/FrontendBehaviors.php:157
+#: src/FrontendBehaviors.php:128
+msgid "Profile successfully updated."
+msgstr "Profil mis à jour avec succés."
+
+#: src/FrontendBehaviors.php:159
+msgid "Your site URL:"
+msgstr "URL de votre site :"
+
+#: src/FrontendBehaviors.php:169
 msgid "Signature max length is %s chars long and accept %s syntax."
 msgstr "Signature de %s caractères maximum et accepte la syntaxe %s."
 
-#: src/FrontendBehaviors.php:161
+#: src/FrontendBehaviors.php:173
 msgid "Profile"
 msgstr "Profil"
 
