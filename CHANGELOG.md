@@ -1,3 +1,7 @@
+AboutTheAuhtor2 0.8 - 2026.06.07
+===========================================================
+* Update locale fr
+
 AboutTheAuhtor2 0.7 - 2025.12.25
 ===========================================================
 * Add user displayname to user profil
