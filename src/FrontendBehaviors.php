@@ -58,7 +58,7 @@ class FrontendBehaviors
     public static function publicEntryAfterContent(): void
     {
         if (App::frontend()->context()->exists('posts') && PluginCommentsWikibar::hasWikiSyntax() && !My::settings()->get('disable_post_signature')) {
-            echo Core::getAbout(App::frontend()->context()->posts->f('user_email'));
+            echo Core::getAbout(App::frontend()->context()->posts->strField('user_email'));
         }
     }
 
@@ -69,11 +69,11 @@ class FrontendBehaviors
     {
         if (App::frontend()->context()->exists('posts') 
             && App::frontend()->context()->exists('comments') 
-            && !App::frontend()->context()->comments->f('comment_trackback')
+            && !App::frontend()->context()->comments->intField('comment_trackback')
             && PluginCommentsWikibar::hasWikiSyntax() 
             && !My::settings()->get('disable_comment_signature')
         ) {
-            echo Core::getAbout(App::frontend()->context()->comments->f('comment_email'));
+            echo Core::getAbout(App::frontend()->context()->comments->strField('comment_email'));
         }
     }
 

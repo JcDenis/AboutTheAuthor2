@@ -182,7 +182,7 @@ class Core
                 ->and('P.blog_id = ' . $sql->quote(App::blog()->id()))
                 ->select();
 
-            $nb = is_null($rs) ? 0 : (int) $rs->f('0');
+            $nb = is_null($rs) ? 0 : $rs->intField('0');
 
             $comments[$user_email] = sprintf(__('one comment', '%s comments', $nb), $nb);
 

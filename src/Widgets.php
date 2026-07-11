@@ -73,7 +73,7 @@ class Widgets
             return '';
         }
 
-        $user_email = (string) App::frontend()->context()->posts->f('user_email');
+        $user_email = (string) App::frontend()->context()->posts->strField('user_email');
 
         $count = '';
         if ($w->get('show_post') || $w->get('show_comment')) {

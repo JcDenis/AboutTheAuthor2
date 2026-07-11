@@ -133,7 +133,7 @@ class BackendBehaviors
     public static function userForm(?MetaRecord $rs): void
     {
         if (PluginCommentsWikibar::hasWikiSyntax()) {
-            echo self::commonForm(is_null($rs)  || $rs->isEmpty() ? '' : (string) App::userPreferences()->createFromUser($rs->f('user_id'))->get(My::id())->get('user_signature'))->render();
+            echo self::commonForm(is_null($rs)  || $rs->isEmpty() ? '' : App::userPreferences()->createFromUser($rs->strField('user_id'))->get(My::id())->get('user_signature'))->render();
         }
     }
 
