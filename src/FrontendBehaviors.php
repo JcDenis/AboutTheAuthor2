@@ -47,7 +47,7 @@ class FrontendBehaviors
         }
 
         // JS for wikibar
-        if (PluginCommentsWikibar::hasWikiSyntax() &&  App::url()->getType() === 'FrontendSession') {
+        if (PluginCommentsWikibar::hasWikiSyntax() &&  App::url()->isType('FrontendSession')) {
             PluginCommentsWikibar::headContent();
         }
     }

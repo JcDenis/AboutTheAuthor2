@@ -54,7 +54,7 @@ class Core
 
         App::behavior()->callBehavior('AboutTheAuthorPageType', $types);
 
-        if (!in_array(App::url()->getType(), iterator_to_array($types))) {
+        if (!App::url()->isType(iterator_to_array($types))) {
             return '';
         }
 
