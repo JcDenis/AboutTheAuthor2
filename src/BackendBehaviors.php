@@ -32,7 +32,7 @@ class BackendBehaviors
         $format = PluginCommentsWikibar::getWikiMode();
         $editor = App::auth()->getOption('editor');
 
-        if (isset($editor[$format])) {
+        if (is_array($editor) && isset($editor[$format])) {
             echo 
             App::backend()->page()->jsJson(My::id(), ['mode' => $format]) .
             App::behavior()->callBehavior('adminPostEditor', $editor[$format], My::id(), ['#' . My::id() . '_signature'], $format) .
@@ -140,11 +140,15 @@ class BackendBehaviors
     /**
      * User preferences form.
      */
-    public static function commonForm(?string $option): Para
+    public static function commonForm(mixed $option): Para
     {
+        if (!is_string($option)) {
+            $option = '';
+        }
+
         return (new Para())
             ->items([
-                (new Textarea(My::id() . '_signature', Html::escapeHTML($option ?? '')))
+                (new Textarea(My::id() . '_signature', Html::escapeHTML($option)))
                 ->class('maximal')
                     ->rows(4)
                     ->label(new Label(__('Signature block:'), Label::OL_TF)),

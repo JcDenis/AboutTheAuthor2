@@ -6,11 +6,13 @@ namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use ArrayObject;
 use Dotclear\App;
+use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Note;
 use Dotclear\Helper\Html\Form\Textarea;
 use Dotclear\Helper\Html\Html;
+use Dotclear\Plugin\FrontendSession\FrontendSession;
 use Dotclear\Plugin\FrontendSession\FrontendSessionProfil;
 use Throwable;
 
@@ -41,8 +43,9 @@ class FrontendBehaviors
     public static function publicHeadContent(): void
     {
         // style
-        $tplset = App::themes()->moduleInfo(App::blog()->settings()->get('system')->get('theme'), 'tplset');
-        if (!My::settings()->get('disable_css') && $tplset == 'dotty') {
+        $theme = App::blog()->settings()->get('system')->get('theme');
+        $tplset = App::themes()->moduleInfo(is_string($theme) ? $theme : '', 'tplset');
+        if (!My::settings()->get('disable_css') && $tplset === 'dotty') {
             echo My::cssLoad('frontend-' . $tplset);
         }
 
@@ -57,7 +60,11 @@ class FrontendBehaviors
      */
     public static function publicEntryAfterContent(): void
     {
-        if (App::frontend()->context()->exists('posts') && PluginCommentsWikibar::hasWikiSyntax() && !My::settings()->get('disable_post_signature')) {
+        if (App::frontend()->context()->exists('posts') 
+            && PluginCommentsWikibar::hasWikiSyntax() 
+            && !My::settings()->get('disable_post_signature')
+            && (App::frontend()->context()->posts instanceof MetaRecord)
+        ) {
             echo Core::getAbout(App::frontend()->context()->posts->strField('user_email'));
         }
     }
@@ -69,11 +76,12 @@ class FrontendBehaviors
     {
         if (App::frontend()->context()->exists('posts') 
             && App::frontend()->context()->exists('comments') 
-            && !App::frontend()->context()->comments->intField('comment_trackback')
+            && (App::frontend()->context()->__get('comments') instanceof MetaRecord)
+            && !App::frontend()->context()->__get('comments')->intField('comment_trackback')
             && PluginCommentsWikibar::hasWikiSyntax() 
             && !My::settings()->get('disable_comment_signature')
         ) {
-            echo Core::getAbout(App::frontend()->context()->comments->strField('comment_email'));
+            echo Core::getAbout(App::frontend()->context()->__get('comments')->strField('comment_email'));
         }
     }
 
@@ -83,19 +91,26 @@ class FrontendBehaviors
     public static function FrontendSessionAction(string $action): void
     {
         if ($action == My::id() && App::auth()->userID() != '') {
-            if (!My::settings()->get('disable_displayname')) {
-                $user_displayname = $_POST[My::id() . '_displayname'];
+            $user_displayname = !My::settings()->get('disable_displayname') ? $_POST[My::id() . '_displayname'] : '';
+            if (!is_string($user_displayname)) {
+                $user_displayname = '';
             }
-            $user_url         = $_POST[My::id() . '_url'];
+            $user_url = $_POST[My::id() . '_url'];
+            if (!is_string($user_url)) {
+                $user_url = '';
+            }
             $user_signature   = $_POST[My::id() . '_signature'];
+            if (!is_string($user_signature)) {
+                $user_signature = '';
+            }
 
             if (!My::settings()->get('disable_displayname') 
-                && trim($user_displayname) !== '' 
-                && !preg_match('/^[A-Za-z0-9._-]{3,}$/', (string) $user_displayname)
+                && !preg_match('/^[A-Za-z0-9._-]{3,}$/', $user_displayname) 
+                && is_string(App::auth()->getInfo('user_displayname'))
             ) {
                 $user_displayname = App::auth()->getInfo('user_displayname');
             }
-            if (!preg_match('|^https?://|', (string) $user_url)) {
+            if (!preg_match('|^https?://|', $user_url)) {
                 $user_url = 'http://' . $user_url;
             }
             $user_url = (string) filter_var($user_url, FILTER_VALIDATE_URL);
@@ -125,7 +140,9 @@ class FrontendBehaviors
                 // reload user
                 App::auth()->checkUser($user_id);
 
-                App::frontend()->context()->frontend_session->success = __('Profile successfully updated.');
+                if (App::frontend()->context()->__get('frontend_session') instanceof FrontendSession) {
+                    App::frontend()->context()->__get('frontend_session')->success = __('Profile successfully updated.');
+                }
             } catch (Throwable $e) {
                 App::frontend()->context()->form_error = $e->getMessage();
             }
@@ -140,7 +157,7 @@ class FrontendBehaviors
         if (App::auth()->userID() != '') {
             $fields = [];
 
-            if (!My::settings()->get('disable_displayname')) {
+            if (!My::settings()->get('disable_displayname') && is_string(App::auth()->getInfo('user_displayname'))) {
                 // user displayname
                 $fields[] = $profil->getInputfield([
                         (new Input(My::id() . '_displayname'))
@@ -151,17 +168,20 @@ class FrontendBehaviors
                     ]);
             }
             // user_site
-            $fields[] = $profil->getInputfield([
-                (new Input(My::id() . '_url'))
-                    ->size(30)
-                    ->maxlength(255)
-                    ->value(Html::escapeHTML(App::auth()->getInfo('user_url')))
-                    ->label(new Label(__('Your site URL:'), Label::OL_TF)),
-            ]);
+            if (is_string(App::auth()->getInfo('user_url'))) {
+                $fields[] = $profil->getInputfield([
+                    (new Input(My::id() . '_url'))
+                        ->size(30)
+                        ->maxlength(255)
+                        ->value(Html::escapeHTML(App::auth()->getInfo('user_url')))
+                        ->label(new Label(__('Your site URL:'), Label::OL_TF)),
+                ]);
+            }
 
             if (PluginCommentsWikibar::hasWikiSyntax()) {
+                $user_signature = is_string(App::auth()->prefs()->get(My::id())->get('user_signature')) ? App::auth()->prefs()->get(My::id())->get('user_signature') : '';
                 $fields[] = $profil->getInputfield([
-                    (new Textarea(My::id() . '_signature', Html::escapeHTML((string) App::auth()->prefs()->get(My::id())->get('user_signature'))))
+                    (new Textarea(My::id() . '_signature', Html::escapeHTML($user_signature)))
                         ->rows(4)
                         ->label((new Label(__('Signature block:'), Label::OL_TF))),
                     (new Note())

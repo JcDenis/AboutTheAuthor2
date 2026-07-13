@@ -14,7 +14,7 @@ _AboutTheAuthor2_ is a plugin for the open-source web publishing software called
 
 ## REQUIREMENTS
 
-* Dotclear 2.36
+* Dotclear 2.39
 * PHP 8.1+
 * Dotclear admin permission for configuration
 

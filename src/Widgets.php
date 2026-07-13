@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\AboutTheAuthor2;
 
 use Dotclear\App;
+use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Helper\Html\Form\Li;
 use Dotclear\Helper\Html\Form\Ul;
@@ -68,12 +69,13 @@ class Widgets
     {
         if ($w->get('offline')
             || !App::frontend()->context()->exists('posts')
+            || !(App::frontend()->context()->posts instanceof MetaRecord)
             || App::frontend()->context()->posts->isEmpty()
         ) {
             return '';
         }
 
-        $user_email = (string) App::frontend()->context()->posts->strField('user_email');
+        $user_email = App::frontend()->context()->posts->strField('user_email');
 
         $count = '';
         if ($w->get('show_post') || $w->get('show_comment')) {
@@ -91,9 +93,9 @@ class Widgets
 
         return $signature === '' ? '' : $w->renderDiv(
             (bool) $w->get('content_only'),
-            My::id() . ' ' . $w->get('class'),
+            My::id() . (is_string($w->get('class')) ? ' ' . $w->get('class') : ''),
             '',
-            ($w->get('title') ? $w->renderTitle(Html::escapeHTML($w->get('title'))) : '') . $count . $signature
+            (is_string($w->get('title')) && !empty($w->get('title')) ? $w->renderTitle(Html::escapeHTML($w->get('title'))) : '') . $count . $signature
         );
     }
 }

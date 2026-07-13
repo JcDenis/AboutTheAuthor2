@@ -97,18 +97,21 @@ class Core
             $signatures              = self::$signatures;
             $signatures[$user_email] = '';
 
-            if (($user_id = self::getUser($user_email)) != '') {
-                $signatures[$user_email] = (string) App::userPreferences()->createFromUser($user_id)->get(My::id())->get('user_signature');
+            if (($user_id = self::getUser($user_email)) !== '') {
+                $signatures[$user_email] = App::userPreferences()->createFromUser($user_id)->get(My::id())->get('user_signature');
+                if (!is_string($signatures[$user_email])) {
+                    $signatures[$user_email] = '';
+                }
             }
 
             // a user exists
-            if ($signatures[$user_email] != '') {
+            if ($signatures[$user_email] !== '') {
                 # --BEHAVIOR-- publicBeforeCommentTransform -- string
                 $buffer = App::behavior()->callBehavior('publicBeforeCommentTransform', $signatures[$user_email]);
                 if ($buffer !== '') {
                     $signatures[$user_email] = $buffer;
                 } else {
-                    if (App::blog()->settings()->system->wiki_comments) {
+                    if (App::blog()->settings()->get('system')->get('wiki_comments')) {
                         App::filter()->initWikiComment();
                     } else {
                         App::filter()->initWikiSimpleComment();
@@ -118,7 +121,7 @@ class Core
                 $signatures[$user_email] = App::filter()->HTMLfilter($signatures[$user_email]);
             }
 
-            self::$signatures = $signatures;
+            self::$signatures = array_filter($signatures, is_string(...));
         }
 
         return self::$signatures[$user_email];
@@ -148,7 +151,7 @@ class Core
                 ->and('P.blog_id = ' . $sql->quote(App::blog()->id()))
                 ->select();
 
-            $nb = is_null($rs) ? 0 : (int) $rs->f('0');
+            $nb = is_null($rs) ? 0 : $rs->cardinal();
 
             $posts[$user_email] = sprintf(__('one entry', '%s entries', $nb), $nb);
 
@@ -208,7 +211,7 @@ class Core
                 ->limit(1)
                 ->select();
 
-            $users[$user_email] = (is_null($rs) || $rs->isEmpty()) ? '' : $rs->f('user_id');
+            $users[$user_email] = (is_null($rs) || $rs->isEmpty()) ? '' : $rs->strField('user_id');
             self::$users = $users;
         }
 
