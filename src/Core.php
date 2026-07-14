@@ -60,12 +60,12 @@ class Core
 
         $items = [];
 
-        if (My::settings()->get('show_posts_count') || My::settings()->get('show_comments_count')) {
+        if (My::settings()->getBool('show_posts_count', false) || My::settings()->getBool('show_comments_count', false)) {
             $count = [];
-            if (My::settings()->get('show_posts_count')) {
+            if (My::settings()->getBool('show_posts_count', false)) {
                 $count[] = self::getPostsCount($user_email);
             }
-            if (My::settings()->get('show_comments_count')) {
+            if (My::settings()->getBool('show_comments_count', false)) {
                 $count[] = self::getCommentsCount($user_email);
             }
 
@@ -111,7 +111,7 @@ class Core
                 if ($buffer !== '') {
                     $signatures[$user_email] = $buffer;
                 } else {
-                    if (App::blog()->settings()->get('system')->get('wiki_comments')) {
+                    if (App::blog()->settings()->get('system')->getBool('wiki_comments', false)) {
                         App::filter()->initWikiComment();
                     } else {
                         App::filter()->initWikiSimpleComment();

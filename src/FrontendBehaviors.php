@@ -43,9 +43,8 @@ class FrontendBehaviors
     public static function publicHeadContent(): void
     {
         // style
-        $theme = App::blog()->settings()->get('system')->get('theme');
-        $tplset = App::themes()->moduleInfo(is_string($theme) ? $theme : '', 'tplset');
-        if (!My::settings()->get('disable_css') && $tplset === 'dotty') {
+        $tplset = App::themes()->moduleInfo(App::blog()->settings()->get('system')->getStr('theme', false), 'tplset');
+        if (!My::settings()->getBool('disable_css', false) && $tplset === 'dotty') {
             echo My::cssLoad('frontend-' . $tplset);
         }
 
@@ -62,7 +61,7 @@ class FrontendBehaviors
     {
         if (App::frontend()->context()->exists('posts') 
             && PluginCommentsWikibar::hasWikiSyntax() 
-            && !My::settings()->get('disable_post_signature')
+            && !My::settings()->getBool('disable_post_signature', false)
             && (App::frontend()->context()->posts instanceof MetaRecord)
         ) {
             echo Core::getAbout(App::frontend()->context()->posts->strField('user_email'));
@@ -79,7 +78,7 @@ class FrontendBehaviors
             && (App::frontend()->context()->__get('comments') instanceof MetaRecord)
             && !App::frontend()->context()->__get('comments')->intField('comment_trackback')
             && PluginCommentsWikibar::hasWikiSyntax() 
-            && !My::settings()->get('disable_comment_signature')
+            && !My::settings()->getBool('disable_comment_signature', false)
         ) {
             echo Core::getAbout(App::frontend()->context()->__get('comments')->strField('comment_email'));
         }
@@ -91,7 +90,7 @@ class FrontendBehaviors
     public static function FrontendSessionAction(string $action): void
     {
         if ($action == My::id() && App::auth()->userID() != '') {
-            $user_displayname = !My::settings()->get('disable_displayname') ? $_POST[My::id() . '_displayname'] : '';
+            $user_displayname = !My::settings()->getBool('disable_displayname', false) ? $_POST[My::id() . '_displayname'] : '';
             if (!is_string($user_displayname)) {
                 $user_displayname = '';
             }
@@ -104,7 +103,7 @@ class FrontendBehaviors
                 $user_signature = '';
             }
 
-            if (!My::settings()->get('disable_displayname') 
+            if (!My::settings()->getBool('disable_displayname', false) 
                 && !preg_match('/^[A-Za-z0-9._-]{3,}$/', $user_displayname) 
                 && is_string(App::auth()->getInfo('user_displayname'))
             ) {
@@ -119,7 +118,7 @@ class FrontendBehaviors
             try {
                 // change user displayname and url
                 $cur = App::auth()->openUserCursor();
-                if (!My::settings()->get('disable_displayname')) {
+                if (!My::settings()->getBool('disable_displayname', false)) {
                     $cur->setField('user_displayname', trim($user_displayname));
                 }
                 $cur->setField('user_url', $user_url);
@@ -157,7 +156,7 @@ class FrontendBehaviors
         if (App::auth()->userID() != '') {
             $fields = [];
 
-            if (!My::settings()->get('disable_displayname') && is_string(App::auth()->getInfo('user_displayname'))) {
+            if (!My::settings()->getBool('disable_displayname', false) && is_string(App::auth()->getInfo('user_displayname'))) {
                 // user displayname
                 $fields[] = $profil->getInputfield([
                         (new Input(My::id() . '_displayname'))

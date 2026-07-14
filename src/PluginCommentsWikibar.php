@@ -30,7 +30,7 @@ class PluginCommentsWikibar
      */
     public static function getWikiMode(): string
     {
-        return App::blog()->settings()->get('system')->get('markdown_comments') ? 'markdown' : 'wiki';
+        return App::blog()->settings()->get('system')->getBool('markdown_comments', false) ? 'markdown' : 'wiki';
     }
 
     /**
