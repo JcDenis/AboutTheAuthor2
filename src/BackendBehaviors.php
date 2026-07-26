@@ -160,7 +160,7 @@ class BackendBehaviors
      */
     public static function updateUser(Cursor $cur, string $user_id = ''): void
     {
-        if (PluginCommentsWikibar::hasWikiSyntax()) {
+        if ($user_id !== '' && PluginCommentsWikibar::hasWikiSyntax()) {
             App::userPreferences()->createFromUser($user_id)->get(My::id())->put(
                 'user_signature',
                 $_POST[My::id() . '_signature'] ?? '',

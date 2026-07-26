@@ -36,8 +36,8 @@ class Backend
             'adminBeforeBlogSettingsUpdate' => BackendBehaviors::adminBeforeBlogSettingsUpdate(...),
             'adminPreferencesFormV2'        => BackendBehaviors::preferencesForm(...),
             'adminUserForm'                 => BackendBehaviors::userForm(...),
-            'adminBeforeUserCreate'         => BackendBehaviors::updateUser(...),
-            'adminBeforeUserUpdate'         => BackendBehaviors::updateUser(...),
+            'adminAfterUserCreate'          => BackendBehaviors::updateUser(...),
+            'adminAfterUserUpdate'          => BackendBehaviors::updateUser(...),
             'adminBeforeUserOptionsUpdate'  => BackendBehaviors::updateUser(...),
         ]);
 
