@@ -1,4 +1,4 @@
-AboutTheAuhtor2 0.9 - xxxx.xx.xx
+AboutTheAuhtor2 0.9 - 2026.08.12
 ===========================================================
 * Bump Dotclear from 2.36 to 2.39 (url type, metarecord methods)
 * Code review (phpstan max)
