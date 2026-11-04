@@ -30,7 +30,7 @@ class BackendBehaviors
         }
 
         $format = PluginCommentsWikibar::getWikiMode();
-        $editor = App::auth()->getOption('editor');
+        $editor = App::auth()->prefs()->get('interface')->get('editor');
 
         if (is_array($editor) && isset($editor[$format])) {
             echo 
