@@ -1,3 +1,7 @@
+AboutTheAuhtor2 0.10 - 2026.11.04
+===========================================================
+* Fix deprecated user option (editor)
+
 AboutTheAuhtor2 0.9 - 2026.08.12
 ===========================================================
 * Bump Dotclear from 2.36 to 2.39 (url type, metarecord methods)
