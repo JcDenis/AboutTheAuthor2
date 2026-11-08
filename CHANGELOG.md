@@ -1,51 +1,51 @@
-AboutTheAuhtor2 0.11 - 2026.11.08
+AboutTheAuthor2 0.11 - 2026.11.08
 ===========================================================
 * Add Claude to contributors
 * move html tags to definition list
 * Add Philippe to contributors
 * add proper color (fake hx)
 
-AboutTheAuhtor2 0.10 - 2026.11.04
+AboutTheAuthor2 0.10 - 2026.11.04
 ===========================================================
 * Fix deprecated user option (editor)
 
-AboutTheAuhtor2 0.9 - 2026.08.12
+AboutTheAuthor2 0.9 - 2026.08.12
 ===========================================================
 * Bump Dotclear from 2.36 to 2.39 (url type, metarecord methods)
 * Code review (phpstan max)
 
-AboutTheAuhtor2 0.8 - 2026.06.07
+AboutTheAuthor2 0.8 - 2026.06.07
 ===========================================================
 * Update locale fr
 
-AboutTheAuhtor2 0.7 - 2025.12.25
+AboutTheAuthor2 0.7 - 2025.12.25
 ===========================================================
 * Add user displayname to user profil
 * Various fixes
 
-AboutTheAuhtor2 0.6 - 2025.09.08
+AboutTheAuthor2 0.6 - 2025.09.08
 ===========================================================
 * Bump Dotclear from 2.34 to 2.36
 * use TraitProcess
 
-AboutTheAuhtor2 0.5 - 2025.06.26
+AboutTheAuthor2 0.5 - 2025.06.26
 ===========================================================
 * Add icon
 * Standardize backend blocs
 
-AboutTheAuhtor2 0.4 - 2025.06.15
+AboutTheAuthor2 0.4 - 2025.06.15
 ===========================================================
 * Add author posts and comments count
 
-AboutTheAuhtor2 0.3 - 2025.06.15
+AboutTheAuthor2 0.3 - 2025.06.15
 ===========================================================
 * Use plugins commentsWikibar and legacyMarkdown settings
 
-AboutTheAuhtor2 0.2 - 2025.06.12
+AboutTheAuthor2 0.2 - 2025.06.12
 ===========================================================
 * Fix backend script
 
-AboutTheAuhtor2 0.1 - 2025.06.08
+AboutTheAuthor2 0.1 - 2025.06.08
 ===========================================================
 * Require Dotclear 2.34
 * Require PHP 8.1+
