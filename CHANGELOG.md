@@ -1,3 +1,10 @@
+AboutTheAuhtor2 0.11 - 2026.11.08
+===========================================================
+* Add Claude to contributors
+* move html tags to definition list
+* Add Philippe to contributors
+* add proper color (fake hx)
+
 AboutTheAuhtor2 0.10 - 2026.11.04
 ===========================================================
 * Fix deprecated user option (editor)
