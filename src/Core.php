@@ -9,6 +9,9 @@ use Dotclear\App;
 use Dotclear\Database\Statement\JoinStatement;
 use Dotclear\Database\Statement\SelectStatement;
 use Dotclear\Helper\Html\Form\Div;
+use Dotclear\Helper\Html\Form\Dl;
+use Dotclear\Helper\Html\Form\Dt;
+use Dotclear\Helper\Html\Form\Dd;
 use Dotclear\Helper\Html\Form\Text;
 
 /**
@@ -82,8 +85,14 @@ class Core
         return (new Div())
             ->class('user-signature')
             ->items([
-                (new Text('h5', __('About the author'))),
-                ...$items,
+                (new Dl())
+                    ->items([
+                        (new Dt())->text(__('About the author')),
+                        (new Dd())
+                            ->items([
+                                ...$items,
+                            ]),
+                    ])
             ])
             ->render();
     }
@@ -137,7 +146,7 @@ class Core
             $posts[$user_email] = '';
 
             $sql = new SelectStatement();
-            $rs = $sql
+            $rs  = $sql
                 ->column($sql->count($sql->unique('P.post_id')))
                 ->from($sql->as(App::db()->con()->prefix() . App::blog()::POST_TABLE_NAME, 'P'), false, true)
                 ->join(
@@ -171,7 +180,7 @@ class Core
             $comments[$user_email] = '';
 
             $sql = new SelectStatement();
-            $rs = $sql
+            $rs  = $sql
                 ->column($sql->count($sql->unique('comment_id')))
                 ->from($sql->as(App::db()->con()->prefix() . App::blog()::COMMENT_TABLE_NAME, 'C'))
                 ->join(
@@ -204,7 +213,7 @@ class Core
             $users = self::$users;
 
             $sql = new SelectStatement();
-            $rs = $sql
+            $rs  = $sql
                 ->column('user_id')
                 ->from(App::db()->con()->prefix() . App::auth()::USER_TABLE_NAME)
                 ->where('user_email = ' . $sql->quote($user_email))
@@ -212,7 +221,7 @@ class Core
                 ->select();
 
             $users[$user_email] = (is_null($rs) || $rs->isEmpty()) ? '' : $rs->strField('user_id');
-            self::$users = $users;
+            self::$users        = $users;
         }
 
         return self::$users[$user_email];
