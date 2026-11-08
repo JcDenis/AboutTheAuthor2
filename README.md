@@ -41,5 +41,6 @@ You can set an author signature from user preferences or public FrontendSession 
 
 * Jean-Christian Denis (author)
 * Claude (AI assistant by Anthropic)
+* Philippe
 
 You are welcome to contribute to this code.
