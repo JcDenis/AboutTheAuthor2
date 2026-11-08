@@ -19,4 +19,5 @@
   font-weight: bold;
   padding: 0.5em 0 0 0;
   border-top: 1px solid var(--content-info-border);
+  color: var(--hx-color);
 }
