@@ -12,6 +12,8 @@ _AboutTheAuthor2_ is a plugin for the open-source web publishing software called
 
 > Displays information about the author of entries or comments.
 
+A [user guide in French](https://github.com/JcDenis/AboutTheAuthor2/blob/master/docs/fr/utilisation.md) is available.
+
 ## REQUIREMENTS
 
 * Dotclear 2.39
@@ -33,6 +35,7 @@ You can set an author signature from user preferences or public FrontendSession 
 
 ## LINKS
 
+* [User guide (in French)](https://github.com/JcDenis/AboutTheAuthor2/blob/master/docs/fr/utilisation.md)
 * [License](https://github.com/JcDenis/AboutTheAuthor2/blob/master/LICENSE)
 * [Packages & details](https://github.com/JcDenis/AboutTheAuthor2/releases) (or on [Repository](https://dotclear.org/plugin/detail/AboutTheAuthor2))
 * [Sources & contributions](https://github.com/JcDenis/AboutTheAuthor2)
