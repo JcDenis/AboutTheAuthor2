@@ -8,7 +8,7 @@
     <desc>Displays information about the author of entries or comments</desc>
     <file>https://github.com/JcDenis/AboutTheAuthor2/releases/download/v0.11/plugin-AboutTheAuthor2.zip</file>
     <da:dcmin>2.39</da:dcmin>
-    <da:details>https://github.com/JcDenis/AboutTheAuthor2/src/branch/master/README.md</da:details>
+    <da:details>https://github.com/JcDenis/AboutTheAuthor2/blob/master/README.md</da:details>
     <da:support>https://github.com/JcDenis/AboutTheAuthor2/issues</da:support>
   </module>
 </modules>
