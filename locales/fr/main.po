@@ -26,7 +26,7 @@ msgstr "Activer les signatures d'utilisateurs à la fin des commentaires"
 
 #: src/BackendBehaviors.php:73
 msgid "Enable default CSS"
-msgstr "Activer la feuille de style par default"
+msgstr "Activer la feuille de style par défaut"
 
 #: src/BackendBehaviors.php:83
 #: src/Widgets.php:41
@@ -66,7 +66,7 @@ msgstr[1] "%s commentaires"
 
 #: src/FrontendBehaviors.php:128
 msgid "Profile successfully updated."
-msgstr "Profil mis à jour avec succés."
+msgstr "Profil mis à jour avec succès."
 
 #: src/FrontendBehaviors.php:159
 msgid "Your site URL:"
@@ -88,3 +88,11 @@ msgstr "Ajoute un widget de signature de l'auteur d'un billet"
 msgid "Show user signature"
 msgstr "Afficher la signature de l'auteur"
 
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "no entry"
+msgstr "aucune publication"
+
+msgid "no comment"
+msgstr "aucun commentaire"
