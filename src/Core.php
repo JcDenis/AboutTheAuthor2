@@ -162,7 +162,7 @@ class Core
 
             $nb = is_null($rs) ? 0 : $rs->cardinal();
 
-            $posts[$user_email] = sprintf(__('one entry', '%s entries', $nb), $nb);
+            $posts[$user_email] = $nb === 0 ? __('no entry') : sprintf(__('one entry', '%s entries', $nb), $nb);
 
             self::$posts = $posts;
         }
@@ -196,7 +196,7 @@ class Core
 
             $nb = is_null($rs) ? 0 : $rs->intField('0');
 
-            $comments[$user_email] = sprintf(__('one comment', '%s comments', $nb), $nb);
+            $comments[$user_email] = $nb === 0 ? __('no comment') : sprintf(__('one comment', '%s comments', $nb), $nb);
 
             self::$comments = $comments;
         }
