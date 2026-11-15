@@ -30,7 +30,7 @@ class Widgets
     {
         $w
             ->create(
-                basename(__DIR__),
+                My::id(),
                 My::name(),
                 self::parseWidget(...),
                 null,
