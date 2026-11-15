@@ -20,7 +20,8 @@ _AboutTheAuthor2_ is a plugin for the open-source web publishing software called
 
 Better with these plugins :
 
-* Plugins commentsWikibar, FrontendSession
+* Plugin commentsWikibar, required to edit and show users signatures after entries and comments
+* Plugin FrontendSession, to let users edit their profile on frontend
 
 ## USAGE
 
