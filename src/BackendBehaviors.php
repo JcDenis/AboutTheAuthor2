@@ -110,6 +110,7 @@ class BackendBehaviors
         $blog_settings->get(My::id())->put('disable_css', empty($_POST[My::id() . 'css']), 'boolean');
         $blog_settings->get(My::id())->put('show_posts_count', !empty($_POST[My::id() . 'show_posts_count']), 'boolean');
         $blog_settings->get(My::id())->put('show_comments_count', !empty($_POST[My::id() . 'show_comments_count']), 'boolean');
+        $blog_settings->get(My::id())->put('disable_displayname', !empty($_POST[My::id() . 'disable_displayname']), 'boolean');
     }
 
     /**
