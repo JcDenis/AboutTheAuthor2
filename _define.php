@@ -22,7 +22,7 @@ $this->registerModule(
     'About the author',
     'Displays information about the author of entries or comments',
     'Jean-Christian Paul Denis and Contributors',
-    '0.11',
+    '0.12',
     [
         'requires'    => [
             ['core', '2.39'],
@@ -40,6 +40,6 @@ $this->registerModule(
         'support'     => 'https://github.com/JcDenis/' . $this->id . '/issues',
         'details'     => 'https://github.com/JcDenis/' . $this->id . '/',
         'repository'  => 'https://raw.githubusercontent.com/JcDenis/' . $this->id . '/master/dcstore.xml',
-        'date'        => '2026-11-08T14:49:27+00:00',
+        'date'        => '2026-11-15T08:51:56+00:00',
     ]
 );

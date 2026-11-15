@@ -1,3 +1,12 @@
+AboutTheAuthor2 0.12 - 2026.11.15
+===========================================================
+* Fix plugin name typo in CHANGELOG
+* [fix] Setting "Disable user to change his displayname" was never saved
+* [fix] Counters with no entry or no comment
+* [fix] Widget ID
+* [lang] Fix typos and missing translations
+* [docs] Add a user guide in French, with screenshots
+
 AboutTheAuthor2 0.11 - 2026.11.08
 ===========================================================
 * Add Claude to contributors
